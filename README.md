@@ -1,5 +1,10 @@
 # Robotic vision project, TTK4255, Magne Sirnes, Aleksander Elvebakk, Gustav Often
 
+## Tasks:
+
+ + Problem 1: Get a slam library running, run this on a pre-recorded video, visualize results
+ + Problem 2: Record video on running lego-robot, collect encoder odometry from robot, compare slam and odometry results.
+
 ## TODO:
 
  + Build lego robot
@@ -8,6 +13,8 @@
  + Fetch camera from Anette
  + Figure out data storage/streaming from lego robot
  + Figure out video streaming from camera
+ + Write some visualization for problem 1
+ + Write some visualization/comparison for problem 2 
 
 ## Useful links:
 
