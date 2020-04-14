@@ -1,4 +1,4 @@
-# Robotic vision project, TTK4255, Magne Sirnes, Aleksander Elvebakk, Gustav Often
+# Robotic vision project, TTK4255, Magne Sirnes, Aleksander Elvebakk, Gustav Often, Thomas Hellum
 
 ## Tasks:
 
