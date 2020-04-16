@@ -1,0 +1,7 @@
+Om kameraet: 
+Focal length: ca 3.6 mm.
+Image resolution: 4128 x 3096 pixels
+Video resolution: 1920 x 1080 pixels
+=>
+Camera intrinsic matrix:
+[
