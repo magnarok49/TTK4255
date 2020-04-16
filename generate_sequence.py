@@ -1,8 +1,7 @@
-# Inspired by https://medium.com/@iKhushPatel/convert-video-to-images-images-to-video-using-opencv-python-db27a128a481
-
 import argparse
 import cv2
 import os
+import time
 
 
 if __name__ == '__main__':
@@ -16,40 +15,57 @@ if __name__ == '__main__':
     super_dir = os.path.join(os.path.dirname(os.path.realpath(__file__)), 'images')
     if not os.path.exists(super_dir):
         os.makedirs(super_dir)  
-
     
     img_dir = os.path.join(super_dir, os.path.basename(args.src).split('.')[0])
-    print(img_dir)
     if not os.path.exists(img_dir):
         os.makedirs(img_dir)
-        
 
+    rgb_dir = os.path.join(img_dir, 'rgb')
+    if not os.path.exists(rgb_dir):
+        os.makedirs(rgb_dir)
 
+    gray_dir = os.path.join(img_dir, 'gray')
+    if not os.path.exists(gray_dir):
+        os.makedirs(gray_dir)
+
+    # Create files
+    rgb = open(os.path.join(img_dir, 'rgb.txt'), 'w')
+    gray = open(os.path.join(img_dir, 'gray.txt'), 'w')
+
+    # Specify parameters
     try:
-        fps = int(1/float(args.fps))
+        tpf = 1/float(args.fps)
     except TypeError:
         print('Using default fps: 10')
-        tpf = 10             # Time per fram: Adjust to capture a frame every ... second
-        fps = int(1/tpf)             
+        fps = 30            # Specify frame rate
+        tpf = 1/fps         # Time per fram: Adjust to capture a frame every ... second        
 
     sec = 0
-    count = 1
 
     # Capture video
     src = cv2.VideoCapture(os.path.realpath(args.src))
-    # src.set(cv2.CAP_PROP_FPS, fps)
     src.set(cv2.CAP_PROP_POS_MSEC,sec*1000)
 
     success,image = src.read()
+    image_gray = cv2.cvtColor(image,cv2.COLOR_BGR2GRAY) # Gray scale images
+
     while success:
-        # image = cv2.cvtColor(image,cv2.COLOR_BGR2GRAY) # Uncomment for gray scale images
-        cv2.imwrite(img_dir + '/' + "image%d.jpg" %count, image)     # save frame as JPEG file      
-        print('Read a new frame: ', "image%d.jpg" %count)
+        # Save frame as JPG file based on frame timestamp
+        img_name = int(src.get(cv2.CAP_PROP_POS_MSEC))
+        cv2.imwrite(rgb_dir + '/' + "%d.jpg" %img_name, image)      
+        cv2.imwrite(gray_dir + '/' + "%d.jpg" %img_name, image) 
+        print("Read a new frame: ", "%d.jpg" %img_name) 
 
-        count += 1
-        sec += fps
-        sec = round(sec, 2)        
+        # Write to file
+        rgb.write('%d.jpg rgb/%d.jpg\n' %(img_name, img_name))
+        gray.write('%d.jpg gray/%d.jpg\n' %(img_name, img_name))
 
+        # Set frame rate
+        sec += tpf
+        sec = round(sec, 2)
         src.set(cv2.CAP_PROP_POS_MSEC,sec*1000)
-        success,image = src.read()
 
+        # Extract frame
+        success,image = src.read()
+        if success:
+            image_gray = cv2.cvtColor(image,cv2.COLOR_BGR2GRAY) # Gray scale images
