@@ -26,3 +26,25 @@
  + Follow guide on the ORBSLAM github page
  + When installing opencv, make sure to check out so you use 3.2 and not latest release
  + if orbslam can install, one trick may be to add the line #include <unistd.h> in ORB_SLAM2/include/System.h
+
+
+## Usage
+
+### Generate sequence
+
+Generates a sequence of images from a specified video. Two parameters should/can be specified when runnning it. PATH_TO_VIDEO need to be specified and can be both absolute and relative, while DESIRED_FPS for images to be captured is optional. If fps is not specified the default will be 10 frames per second.   
+The script first generates a directory for the images to be saved in the same folder as the script that was ran. The folder name is the same as for the video. Then based on the parameter fps it will save certain amount of frames in the image folder.  
+
+```bash
+$ python3 generate_sequence.py PATH_TO_VIDEO
+$ python3 generate_sequence.py PATH_TO_VIDEO --fps DESIRED_FPS
+```
+
+
+### Camera calibration
+
+Computes the calibration matrix for camera. Specify path to folder containing images for calibration.
+
+```bash
+$ python3 camera_calibration.py PATH_TO_FOLDER
+```

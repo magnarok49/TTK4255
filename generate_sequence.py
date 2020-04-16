@@ -8,15 +8,31 @@ import os
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
     parser.add_argument('src', type=str, help='Specify path to video source.')
+    parser.add_argument('--fps', type=str, default=None,
+                        help='Specify the frame rate for the images to be captured.')
     args = parser.parse_args()
 
     # Create directories
-    img_dir = os.path.join(os.path.dirname(os.path.realpath(__file__)), 'images')
+    super_dir = os.path.join(os.path.dirname(os.path.realpath(__file__)), 'images')
+    if not os.path.exists(super_dir):
+        os.makedirs(super_dir)  
+
+    
+    img_dir = os.path.join(super_dir, os.path.basename(args.src).split('.')[0])
+    print(img_dir)
     if not os.path.exists(img_dir):
-        os.makedirs(img_dir)  
+        os.makedirs(img_dir)
+        
+
+
+    try:
+        fps = int(1/float(args.fps))
+    except TypeError:
+        print('Using default fps: 10')
+        tpf = 10             # Time per fram: Adjust to capture a frame every ... second
+        fps = int(1/tpf)             
 
     sec = 0
-    fps = 1             # Adjust to capture a frame every ... second
     count = 1
 
     # Capture video
