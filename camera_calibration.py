@@ -1,7 +1,5 @@
+#!/usr/bin/env python3
 # Code found on https://www.learnopencv.com/camera-calibration-using-opencv/
-
-
-#!/usr/bin/env python
 
 import argparse
 import cv2
