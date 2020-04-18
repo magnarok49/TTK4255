@@ -44,8 +44,8 @@ if __name__ == '__main__':
         fps = float(args.fps)
         tpf = 1/float(args.fps)
     except TypeError:
-        print('Using default fps: 10')
-        fps = 10            # Specify frame rate
+        print('Using default fps: 30')
+        fps = 30            # Specify frame rate
         tpf = 1/fps         # Time per fram: Adjust to capture a frame every ... second        
     
     # Create yaml file

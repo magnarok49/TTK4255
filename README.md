@@ -38,12 +38,14 @@ Requirements:
  + opencv-python (tested with 4.2.0)
  + pyyaml
  
-Generates a sequence of images from a specified video. Two parameters should/can be specified when runnning it. PATH_TO_VIDEO need to be specified and can be both absolute and relative, while DESIRED_FPS for images to be captured is optional. If fps is not specified the default will be 30 frames per second.   
+Generates a sequence of images from a specified video. Two parameters should/can be specified when runnning it. PATH_TO_VIDEO needs to be specified and can be both absolute and relative, while DESIRED_FPS for images to be captured is optional. If fps is not specified the default will be 30 frames per second.   
 The script first generates directories for images to be saved, located in the same folder as the generate_sequenec.py script. The images will be named based on the millisecond they were captured and saved to the image folder. The images will be saved both in rgb and gray scale, and saved in their respective folders. Additionally two .txt files (for rgb and gray scale) are created containing the time instant the frame was captured and the name of the respective image. 
+If the `--create_yaml YAML_NAME` option is passed, a yaml file with default options and correct fps will be created along with the txt files.
 
 ```bash
 $ python3 generate_sequence.py PATH_TO_VIDEO
 $ python3 generate_sequence.py PATH_TO_VIDEO --fps DESIRED_FPS
+$ python3 generate_sequence.py PATH_TO_VIDEO --create_yaml YAML_NAME
 ```
 
 ### Yaml utils
