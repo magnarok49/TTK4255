@@ -69,7 +69,7 @@ dict = {
 }
 ```
  
-See TUM1.yaml in ORB_SLAM2/Examples or makeCamSubDict() etc. for an overview of all values that can be set.. 
+See TUM1.yaml in ORB_SLAM2/Examples/Monocular or `make***SubDict()` etc. in yaml_utils.py for an overview of all values that can be set.. 
 
 ### Camera calibration
 
