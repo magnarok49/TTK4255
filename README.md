@@ -30,6 +30,7 @@
 
 ## Usage
 
+
 ### Generate sequence
 
 Requirements: 
@@ -45,6 +46,30 @@ $ python3 generate_sequence.py PATH_TO_VIDEO
 $ python3 generate_sequence.py PATH_TO_VIDEO --fps DESIRED_FPS
 ```
 
+### Yaml utils
+
+Requirements: 
+ + pyyaml
+
+Utility functions for dealing with YAML files in python.
+The only functions you need to deal with are `createDefaultYamlFile(filePath)` and `updateExistingFile(dict, filePath [,newFilePath])`
+The first of which generates a yaml file at the specified path with default values.
+The second accepts a dict and a path to an existing yaml file, it will apply the changes found in dict to this yaml file,
+or optionally save the updated yaml file to a new path.
+
+The dictionary should be formatted as:
+```python3
+dict = {
+    "Camera": {
+        "fps": NEW_FPS_VALUE,
+        "fx": NEW_FX_VALUE,
+        etc..
+    },
+    etc..
+}
+```
+ 
+See TUM1.yaml in ORB_SLAM2/Examples or makeCamSubDict() etc. for an overview of all values that can be set.. 
 
 ### Camera calibration
 
