@@ -3,5 +3,9 @@ Focal length: ca 3.6 mm.
 Image resolution: 4128 x 3096 pixels
 Video resolution: 1920 x 1080 pixels
 =>
+Fx: 648
+Fy: 486
 Camera intrinsic matrix:
-[
+[648 0   960 0
+ 0   486 540 0
+ 0   0   1   0]
