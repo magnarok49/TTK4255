@@ -4,6 +4,7 @@ import argparse
 import cv2
 import os
 import time
+import shutil
 import yaml_utils as yaml
 
 if __name__ == '__main__':
@@ -22,9 +23,11 @@ if __name__ == '__main__':
     if not os.path.exists(super_dir):
         os.makedirs(super_dir)
 
-    # TODO: what happens when you run this twice on the same video name? 
     img_dir = os.path.join(super_dir, os.path.basename(args.src).split('.')[0])
     if not os.path.exists(img_dir):
+        os.makedirs(img_dir)
+    else:
+        shutil.rmtree(img_dir)      # Removes all the subdirectories to avoid having pictures collected at different fps if video is run multiple times
         os.makedirs(img_dir)
 
     rgb_dir = os.path.join(img_dir, 'rgb')
