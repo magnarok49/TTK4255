@@ -49,7 +49,7 @@ if __name__ == '__main__':
     except TypeError:
         print('Using default fps: 30')
         fps = 30            # Specify frame rate
-        tpf = 1/fps         # Time per fram: Adjust to capture a frame every ... second        
+        tpf = 1/fps         # Time per frame: Adjust to capture a frame every ... second        
     
     # Create yaml file
     if args.create_yaml:
@@ -67,25 +67,33 @@ if __name__ == '__main__':
     sec = 0
     src = cv2.VideoCapture(os.path.realpath(args.src))
     src.set(cv2.CAP_PROP_POS_MSEC,sec*1000)
-
+    
+    rotateFlag = False
+    if src.get(cv2.CAP_PROP_FRAME_WIDTH) > src.get(cv2.CAP_PROP_FRAME_HEIGHT):
+        rotateFlag = True
+    
     success,image = src.read()
     image_gray = cv2.cvtColor(image,cv2.COLOR_BGR2GRAY) # Gray scale images
     
     while success:
         # Save frame as JPG file based on frame timestamp
         img_name = int(src.get(cv2.CAP_PROP_POS_MSEC))
-        cv2.imwrite(rgb_dir + '/' + "%d.jpg" %img_name, image)
-        cv2.imwrite(gray_dir + '/' + "%d.jpg" %img_name, image_gray)
+        
+        if rotateFlag:
+            cv2.imwrite(rgb_dir + '/' + "%d.jpg" %img_name, cv2.flip(image.transpose((1,0,2)),1))
+            cv2.imwrite(gray_dir + '/' + "%d.jpg" %img_name, cv2.flip(image_gray.transpose(),1))
+        else:  
+            cv2.imwrite(rgb_dir + '/' + "%d.jpg" %img_name, image)
+            cv2.imwrite(gray_dir + '/' + "%d.jpg" %img_name, image_gray)
         if args.verbose: print("Read a new frame: ", "%d.jpg" %img_name)
         
         # Write to file
-        rgb.write('%f rgb/%d.jpg\n' %(sec, img_name))
-        gray.write('%f gray/%d.jpg\n' %(sec, img_name))
+        rgb.write('%f rgb/%d.jpg\n' %(img_name/1000.0, img_name))
+        gray.write('%f gray/%d.jpg\n' %(img_name/1000.0, img_name))
         
         # Set frame rate
         sec += tpf
-        sec = round(sec, 2)
-        src.set(cv2.CAP_PROP_POS_MSEC,sec*1000)
+        src.set(cv2.CAP_PROP_POS_MSEC, sec*1000)
 
         # Extract frame
         success,image = src.read()

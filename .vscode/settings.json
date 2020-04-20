@@ -1,8 +1,10 @@
 { 
     "files.exclude": {
-        "**/images/": true
+        "**/images/**/rgb/": true,
+        "**/images/**/gray/": true
     },
     "files.watcherExclude": {
-        "**/images/": true
+        "**/images/**/rgb/": true,
+        "**/images/**/gray/": true
     }
 }
