@@ -1,3 +1,8 @@
-"files.watcherExclude": {
-    "./images": true
+{ 
+    "files.exclude": {
+        "**/images/": true
+    },
+    "files.watcherExclude": {
+        "**/images/": true
+    }
 }
