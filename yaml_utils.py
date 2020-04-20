@@ -78,9 +78,9 @@ def makeViewerSubDict():
     }
 
 def makeBaseDict():
-    baseobj = { **makeCamSubDict(),
-        **makeORBextractorSubDict(),
-        **makeViewerSubDict()
+    baseobj = { **flattenDict(makeCamSubDict()),
+        **flattenDict(makeORBextractorSubDict()),
+        **flattenDict(makeViewerSubDict())
     }
     return baseobj
 
@@ -103,10 +103,15 @@ def dumpToFile(myDict, filePath:str):
 # where elements in oldDict already exist, 
 # these are overwritten by values in newDict
 def mergeIntoDict(oldDict, newDict):
-    newMerged = {}
-    for key in newDict: # loop here since {**a,**b} only does a shallow merge
-        newMerged[key] = {**(oldDict[key]), **(newDict[key])}
-    return {**oldDict, **newMerged}
+    return {**oldDict, **flattenDict(newDict)}
+
+def flattenDict(deepDict):
+    d = {}
+    for k1 in deepDict:
+        for k2 in deepDict[k1]:
+            d[k1 + "." + k2] = deepDict[k1][k2]
+    return d
 
 if __name__ == "__main__":
-    updateExistingFile({"Camera":{"fps":30}}, "test.yaml")
+    #createDefaultYamlFile("test.yaml")
+    updateExistingFile({"Camera":{"fps":60}}, "test.yaml")
