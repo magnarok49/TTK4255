@@ -10,10 +10,13 @@ import glob
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
     parser.add_argument('imagepath', type=str, help='Specify path to video source.')
+    parser.add_argument('size', type = int, help = "size of checker square in mm")
+    parser.add_argument('checker_width', type = int, help = "amount of squares horizontally-1")
+    parser.add_argument('checker_height', type = int, help = "amount of squares vertically-1")
     args = parser.parse_args()
 
     # Defining the dimensions of checkerboard
-    CHECKERBOARD = (6,9)
+    CHECKERBOARD = (args.checker_height,args.checker_width)
     criteria = (cv2.TERM_CRITERIA_EPS + cv2.TERM_CRITERIA_MAX_ITER, 30, 0.001)
 
     # Creating vector to store vectors of 3D points for each checkerboard image
@@ -25,6 +28,7 @@ if __name__ == '__main__':
     # Defining the world coordinates for 3D points
     objp = np.zeros((1, CHECKERBOARD[0] * CHECKERBOARD[1], 3), np.float32)
     objp[0,:,:2] = np.mgrid[0:CHECKERBOARD[0], 0:CHECKERBOARD[1]].T.reshape(-1, 2)
+    objp = objp*args.size
     prev_img_shape = None
 
     # Extracting path of individual image stored in a given directory
@@ -37,7 +41,7 @@ if __name__ == '__main__':
         # Find the chess board corners
         # If desired number of corners are found in the image then ret = true
         ret, corners = cv2.findChessboardCorners(gray, CHECKERBOARD, cv2.CALIB_CB_ADAPTIVE_THRESH + cv2.CALIB_CB_FAST_CHECK + cv2.CALIB_CB_NORMALIZE_IMAGE)
-        
+        print(ret)
         """
         If desired number of corner are detected,
         we refine the pixel coordinates and display 
