@@ -27,7 +27,7 @@ if __name__ == '__main__':
     if not os.path.exists(img_dir):
         os.makedirs(img_dir)
     else:
-        shutil.rmtree(img_dir)      # Removes all the subdirectories to avoid having pictures collected at different fps if video is run multiple times
+        shutil.rmtree(img_dir) #remove potential dupes on diff fps
         os.makedirs(img_dir)
 
     rgb_dir = os.path.join(img_dir, 'rgb')
