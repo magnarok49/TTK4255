@@ -4,7 +4,7 @@
         "**/images/**/gray/": true
     },
     "files.watcherExclude": {
-        "**/images/**/rgb/": true,
-        "**/images/**/gray/": true
+        "**/images/**": true,
+        "**/images/**": true
     }
 }
