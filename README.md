@@ -75,7 +75,7 @@ See TUM1.yaml in ORB_SLAM2/Examples/Monocular or `make***SubDict()` etc. in yaml
 
 ### Camera calibration
 
-Computes the calibration matrix for camera. The following needs to be specified as input arguments for the script when running it.
+Computes the calibration matrix and distortion parameters for camera. The following needs to be specified as input arguments for the script when running it.
  + Path to folder containing pictures of checkerboard
  + size of side of each square on board
  + Amounts of inner corners vertically (amount of squares -1)
