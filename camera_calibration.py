@@ -24,6 +24,10 @@ if __name__ == '__main__':
     # Creating vector to store vectors of 2D points for each checkerboard image
     imgpoints = [] 
 
+    #Creating files for storing intrinsics
+    dist_file = open("dist.txt", "w+")
+    K_file = open("K.txt", "w+")
+
 
     # Defining the world coordinates for 3D points
     objp = np.zeros((1, CHECKERBOARD[0] * CHECKERBOARD[1], 3), np.float32)
@@ -72,18 +76,34 @@ if __name__ == '__main__':
     and corresponding pixel coordinates of the 
     detected corners (imgpoints)
     """
-    print('objpoints: ', objpoints)
-    print('imgpoints: ', imgpoints)
-    print('gray.shape[::-1]: ', gray.shape[::-1])
+    #print('imgpoints: ', imgpoints)
+    #print('gray.shape[::-1]: ', gray.shape[::-1])
+
+    
 
     ret, mtx, dist, rvecs, tvecs = cv2.calibrateCamera(objpoints, imgpoints, gray.shape[::-1], None, None)
 
     
-    print("dist : \n")
-    print(dist)
+    
     print("rvecs : \n")
     print(rvecs)
     print("tvecs : \n")
     print(tvecs)
+    print("dist : \n")
+    print(dist)
+    dist_file.write("k1: ")   
+    dist_file.write(str(dist[0, 0])) 
+    dist_file.write("\nk2: ")
+    dist_file.write(str(dist[0, 1]))
+    dist_file.write("\np1: ")
+    dist_file.write(str(dist[0, 2]))
+    dist_file.write("\np2: ")
+    dist_file.write(str(dist[0, 3]))
+    dist_file.write("\nk3: ")
+    dist_file.write(str(dist[0, 4]))
+    dist_file.close()
     print("Camera matrix : \n")
     print(mtx)
+    K_file.write(str(mtx))
+    K_file.close()
+
