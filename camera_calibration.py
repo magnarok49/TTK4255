@@ -25,9 +25,15 @@ if __name__ == '__main__':
     imgpoints = [] 
 
     #Creating files for storing intrinsics
-    dist_file = open("dist.txt", "w+")
-    K_file = open("K.txt", "w+")
-
+    super_dir = os.path.join(os.path.dirname(os.path.realpath(__file__)), 'Intrinsics')
+    if not os.path.exists(super_dir):
+           os.makedirs(super_dir)
+    dist_file = open(os.path.join(super_dir,'dist.txt'), 'w+')
+    K_file = open(os.path.join(super_dir, 'K.txt'), 'w+')
+    r_vec_file = open(os.path.join(super_dir, 'rotations.txt'), 'w+')
+    trans_vec_file = open(os.path.join(super_dir, 'translations.txt'), 'w+')
+    imgpoints_file = open(os.path.join(super_dir, 'imgpoints.txt'), 'w+')
+    objpoints_file = open(os.path.join(super_dir, 'objpoints.txt'), 'w+')
 
     # Defining the world coordinates for 3D points
     objp = np.zeros((1, CHECKERBOARD[0] * CHECKERBOARD[1], 3), np.float32)
@@ -85,10 +91,14 @@ if __name__ == '__main__':
 
     
     
-    print("rvecs : \n")
-    print(rvecs)
-    print("tvecs : \n")
-    print(tvecs)
+    r_vec_file.write(str(rvecs))
+    r_vec_file.close()
+    trans_vec_file.write(str(tvecs))
+    trans_vec_file.close()
+    imgpoints_file.write(str(imgpoints))
+    imgpoints_file.close()
+    objpoints_file.write(str(objpoints))
+    objpoints_file.close()
     print("dist : \n")
     print(dist)
     dist_file.write("k1: ")   
