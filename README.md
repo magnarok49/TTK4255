@@ -75,7 +75,11 @@ See TUM1.yaml in ORB_SLAM2/Examples/Monocular or `make***SubDict()` etc. in yaml
 
 ### Camera calibration
 
-Computes the calibration matrix for camera. Specify path to folder containing images for calibration, specify size of checker-squares in mm,  specify amount of inner corners vertically and horizontally.
+Computes the calibration matrix for camera. The following needs to be specified as input arguments for the script when running it.
+ + Path to folder containing pictures of checkerboard
+ + size of side of each square on board
+ + Amounts of inner corners vertically (amount of squares -1)
+ + Amount of inner corners horizontally (amount of squares -1)
 
 ```bash
 $ python3 camera_calibration.py PATH_TO_FOLDER SIZE_OF_CHECKER_SQUARES_IN_MM AMOUNT_OF_INNER_CORNERS_VERTICALLY AMOUNT_OF_INNER_CORNERS_HORIZONTALLY
