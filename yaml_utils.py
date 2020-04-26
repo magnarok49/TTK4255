@@ -36,15 +36,15 @@ def createDefaultYamlFile(filePath:str="config.yaml"):
 def makeCamSubDict():
     return {
         "Camera": {
-            "fx": 646,
-            "fy": 486,
-            "cx": 960,
-            "cy": 540,
-            "k1": 0,
-            "k2": 0,
-            "k3": 0,
-            "p1": 0,
-            "p2": 0,
+            "fx": 1517,
+            "fy": 1517,
+            "cx": 575,
+            "cy": 943,
+            "k1": 0.355,
+            "k2": -2.11,
+            "k3": 5.306,
+            "p1": 0.000362,
+            "p2": -0.001676,
             "fps": 30,
             "RGB": 1
         }
