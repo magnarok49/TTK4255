@@ -80,7 +80,7 @@ Computes the calibration matrix and distortion parameters for camera. The follow
  + size of side of each square on board
  + Amounts of inner corners vertically (amount of squares -1)
  + Amount of inner corners horizontally (amount of squares -1)
-
 ```bash
 $ python3 camera_calibration.py PATH_TO_FOLDER SIZE_OF_CHECKER_SQUARES_IN_MM AMOUNT_OF_INNER_CORNERS_VERTICALLY AMOUNT_OF_INNER_CORNERS_HORIZONTALLY
 ```
+Also, be careful not to use autofocus when taking a video, since this changes the camera intrinsics.
